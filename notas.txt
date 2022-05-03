@@ -1,0 +1,116 @@
+🟢npm install moment --save : Paquete que se encarga de manejar las fechas en JavaScript
+
+🟢 --save : El documento que vamos a instalar dentro del proyecto es necesario para vivir en produccion.
+
+🟢 -dev : El documento que vamos a instalar solo es necesario en nuestro entorno local o en el entorno de desarrollo
+
+🟢 npm install date-fns : Al igual que moment se engarga de manejar fechas y datos
+
+🟢 npm i : abreviacion de nmp install
+
+🟢 -D : abreviacion para --save-dev
+
+🟢npm list -g --depth 0: Listar paquetes instalados de forma global
+
+🟢npm install react --dry-run : simula que instala react y muestra los paquetes y archivos descargados y otros datos
+
+🟢Instalar la última versión y desde los servidores de npm:
+
+    npm install webpack -f
+
+    npm install webpack --force
+
+🟢Instalar una versión exacta de un paquete:
+    npm install json-server@0.15.0
+
+    🟢Actualizar paquetes
+
+🟢Revisar que paquetes disponen de nuevas versiones
+    npm outdate
+
+🟢Para ver un output más detallado
+    npm outdate --dd
+
+🟢Actualizar los paquetes que no están en la ultima versión
+    npm update
+
+🟢Actualizar un paquete especifico
+    npm install json-server@latest
+
+🟢Eliminar paquetes
+
+🟢Eliminar un paquete de node_modules y del archivo package.json
+    npm uninstall json-server
+
+🟢Desinstalar un paquete de todo node_modules pero no del archivo package.json
+    npm uninstall webpack --no-save
+🟢^ = Si mantenemos el caret dentro de la configuración de nuestro package estamos garantizando que 
+cuando realicemos una actualización o tengamos un cambio que podamos realizar, vamos a hacer actualización 
+de los cambios menores y de los parches o bug fixes. Para quedarnos en una sola versión eliminamos el caret.
+
+🟢~ = Establece que vamos a recibir actualizaciones o cambios solamente de los cambios que son parches o 
+bug fixes.
+
+🟢Los scripts NPM: Son comandos que podemos establecer para poder ejecutar desde la consola. 
+Estos nos van a dar una serie de salidas según sea el caso. Podemos crear la cantidad de scripts que
+necesitemos. Estos scripts van a poder correr de forma nativa dentro de nuestra terminal.
+
+🟢Puedes también especificar scripts con el prefijo “pre” que se ejecutarán automáticamente antes del 
+comando que ejecutaste. Por ejemplo, si defines el comando build y prebuild, cuando corras npm run build 
+el comando prebuild se ejecutará primero. Esto sirbe para poder ejecutar tareas que hagan algún tipo de 
+preparación necesaria para correr el comando principal. Sin embargo, hay que hacer notar que si el comando 
+pre falla (retorna un valor que no es 0) el comando principal no se ejecutará. Esto es algo bueno ya que si 
+nuestro proceso de preparación no se realiza de forma exitosa, puede que tengamos problemas al querer 
+ejecutar la tarea principal.
+
+En algunas ocaciones, sin embargo, la tarea previa puede fallar sin que eso afecte la ejecución de la tarea 
+principal. En esos casos puedes usar || exit 0 para retornar 0:
+
+"presass-build": "(rm css/*.css; rm css/*.css.map) || exit 0"
+Ese es un ejemplo de un comando que hice hace un tiempo. rm puede fallar si el directorio css está vacio, 
+y en ese caso no hay problema, la tarea principal puede funcionar sin ningún problema ya que presass-build 
+tiene el propósito de vaciar ese directorio.
+
+
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode production",
+    "start": "serve ./dist -s -l 8080"
+    dev: Modo desarrollo.
+    build: Compila todo y me crea un directorio dist.
+    start: Toma el directorio dist y lanzo un servidor en modo producción.
+
+🟢En caso de que nuestros archivos de node_module no estén bien instalados o tengamos una versión anterior lo que podemos hacer 
+es lo siguiente:
+    npm cache clear --force
+
+🟢#Para verificar que verdaderamente se borro podemos usar
+    npm cache verify
+
+🟢Uno de los errores que podemos tener es tener algún valor corrupto en node_module, o tambien que la instalación no este 
+completa de los paquetes que hemos instalado, para ello podemos eliminar el paquete con el siguiente comando:
+    rm -rf node_modules  #este comando eliminar la carpeta 
+
+🟢Otra alternativa para eliminar de forma segura una carpeta es instalando el siguiente paquete:
+    sudo npm install -g rimraf
+
+🟢Ahora podemos ejecutar el siguiente comando para eliminar node_module
+    rimraf node_modules 
+🟢Ahora podemos volver a instalar nuestro paquetes
+    npm install
+
+🟢Podemos revisar las vulnerabilidades de nuestro proyecto con:
+    npm audit
+🟢En caso de tener vulverabilidades, se recomienda usar el comando:
+    npm audit fix
+🟢Y en caso de que esto no lo solucione, podemos ir actualizandolos de uno en uno.
+
+🟢npm audit :para ver las vulnerabilidades que tenemos en nuestro proyecto
+npm audit --json: nos genera un json con información un poco mas detallada de lo que esta pasando con estos paquetes que instalamos
+
+🟢una ves sepamos cual es la vulnerabilidad podemos proceder a actualizar cualquiera de los paquetes 
+    ejem: npm update eslint-utils --depth 2 esto para instalar todas sus dependencias
+
+🟢nom audit fix :es para solucionar las vulnerabilidades que tengamos en nuestro proyecto básicamente, actualiza a la ultima version 
+nuestros paquetes con las dependencias que requieren, después de esto volvemos a correr npm audit para ver que ya no tenemos 
+vulnerabilidades.
+también hay una herramienta que garantiza que estemos siempre actualizados con nuestras dependencias del proyecto y es snyk.io
